@@ -1,4 +1,4 @@
-var __marge, __async_call, __slice, __bind, __uncurry_this, __add_event, __remove_event;
+var __marge, __async_call, __slice, __bind, __uncurry_this, __add_event, __remove_event, __ready;
 
 __marge = function(destination, source) {
   var key, value;
@@ -66,4 +66,22 @@ __remove_event = function(obj, type, func){
     }else if(obj.detachEvent){
 	obj.detachEvent("on" + type, func);
     }
-}
+};
+
+__ready = function(func){
+    var ua;
+    ua = navigator.userAgent.toLowerCase();
+    if(typeof document.addEventListener !== "undefined"){
+	document.addEventListener("DOMContentLoaded", func, false);
+    }else if( ua.indexOf( /msie\s([^\s]*)/ ) !== -1){
+	try {
+	    document.documentElement.doScroll("left");
+	} catch(error){
+	    setTimeout(arguments.callee, 0);
+	    return;
+	}
+	func();
+    }else{
+	window.onload = func;
+    }
+};

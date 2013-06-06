@@ -15,3 +15,10 @@ if( typeof document.getElementsByClassName === "undefined"){
 	return class_selectors;
     };
 }
+
+if (!("console" in window)) {
+    window.console = {};
+    window.console.log = function(str){
+        return str;
+    };
+}

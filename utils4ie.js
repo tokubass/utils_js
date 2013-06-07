@@ -16,7 +16,7 @@ if( typeof document.getElementsByClassName === "undefined"){
     };
 }
 
-if (!("console" in window)) {
+if ( typeof window.console === "undefined") {
     window.console = {};
     window.console.log = function(str){
         return str;
